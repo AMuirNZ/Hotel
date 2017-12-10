@@ -65,6 +65,9 @@
     </Compile>
     <Compile Include="Data\Database\Bookings.cs" />
     <Compile Include="Data\Database\Guests.cs" />
+    <Compile Include="Data\Database\sysdiagram.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Guests.cs" />
     <Compile Include="Data\Rooms.cs" />
     <Compile Include="Data\Database\Guest.cs">

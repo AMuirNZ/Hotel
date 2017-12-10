@@ -29,5 +29,6 @@ namespace Hotel.Data.Database
         public virtual DbSet<Booking> Bookings { get; set; }
         public virtual DbSet<Guest> Guests { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

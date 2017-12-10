@@ -42,8 +42,10 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.txtBookingTo = new System.Windows.Forms.TextBox();
-            this.txtBookingFrom = new System.Windows.Forms.TextBox();
+            this.txtBookingTo = new System.Windows.Forms.DateTimePicker();
+            this.btnDeleteBooking = new System.Windows.Forms.Button();
+            this.btnAddBooking = new System.Windows.Forms.Button();
+            this.txtBookingFrom = new System.Windows.Forms.DateTimePicker();
             this.txtRoomIDFK = new System.Windows.Forms.TextBox();
             this.txtBookingID = new System.Windows.Forms.TextBox();
             this.dgvBookings = new System.Windows.Forms.DataGridView();
@@ -56,18 +58,18 @@
             this.txtRoomBooked = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.DGVGuests = new System.Windows.Forms.DataGridView();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.txtBarCharge = new System.Windows.Forms.TextBox();
+            this.txtWiFiCharge = new System.Windows.Forms.TextBox();
             this.txtGuestIDFK = new System.Windows.Forms.TextBox();
+            this.txtTelephoneCharge = new System.Windows.Forms.TextBox();
+            this.txtRoomCharge = new System.Windows.Forms.TextBox();
+            this.txtBillingID = new System.Windows.Forms.TextBox();
+            this.dgvBillings = new System.Windows.Forms.DataGridView();
             this.txtBillingsID = new System.Windows.Forms.Label();
             this.txtGuestID = new System.Windows.Forms.TextBox();
             this.txtBookingIDFK = new System.Windows.Forms.TextBox();
-            this.txtRoomCost = new System.Windows.Forms.TextBox();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.dgvBillings = new System.Windows.Forms.DataGridView();
-            this.txtBillingID = new System.Windows.Forms.TextBox();
-            this.txtRoomCharge = new System.Windows.Forms.TextBox();
-            this.txtTelephoneCharge = new System.Windows.Forms.TextBox();
-            this.txtWiFiCharge = new System.Windows.Forms.TextBox();
-            this.txtBarCharge = new System.Windows.Forms.TextBox();
+            this.txtRoomCost = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DGVData)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -200,13 +202,15 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(535, 326);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.Text = "Rooms";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.txtRoomCost);
             this.tabPage2.Controls.Add(this.txtBookingTo);
+            this.tabPage2.Controls.Add(this.btnDeleteBooking);
+            this.tabPage2.Controls.Add(this.btnAddBooking);
             this.tabPage2.Controls.Add(this.txtBookingFrom);
             this.tabPage2.Controls.Add(this.txtRoomIDFK);
             this.tabPage2.Controls.Add(this.txtBookingID);
@@ -216,22 +220,42 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(535, 326);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "Bookings";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // txtBookingTo
             // 
-            this.txtBookingTo.Location = new System.Drawing.Point(251, 238);
+            this.txtBookingTo.Location = new System.Drawing.Point(227, 264);
             this.txtBookingTo.Name = "txtBookingTo";
-            this.txtBookingTo.Size = new System.Drawing.Size(100, 20);
-            this.txtBookingTo.TabIndex = 6;
+            this.txtBookingTo.Size = new System.Drawing.Size(200, 20);
+            this.txtBookingTo.TabIndex = 16;
+            // 
+            // btnDeleteBooking
+            // 
+            this.btnDeleteBooking.Location = new System.Drawing.Point(121, 297);
+            this.btnDeleteBooking.Name = "btnDeleteBooking";
+            this.btnDeleteBooking.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteBooking.TabIndex = 15;
+            this.btnDeleteBooking.Text = "Delete Room";
+            this.btnDeleteBooking.UseVisualStyleBackColor = true;
+            this.btnDeleteBooking.Click += new System.EventHandler(this.btnDeleteBooking_Click);
+            // 
+            // btnAddBooking
+            // 
+            this.btnAddBooking.Location = new System.Drawing.Point(21, 297);
+            this.btnAddBooking.Name = "btnAddBooking";
+            this.btnAddBooking.Size = new System.Drawing.Size(75, 23);
+            this.btnAddBooking.TabIndex = 15;
+            this.btnAddBooking.Text = "Add";
+            this.btnAddBooking.UseVisualStyleBackColor = true;
+            this.btnAddBooking.Click += new System.EventHandler(this.btnAddBooking_Click);
             // 
             // txtBookingFrom
             // 
-            this.txtBookingFrom.Location = new System.Drawing.Point(121, 238);
+            this.txtBookingFrom.Location = new System.Drawing.Point(21, 264);
             this.txtBookingFrom.Name = "txtBookingFrom";
-            this.txtBookingFrom.Size = new System.Drawing.Size(100, 20);
-            this.txtBookingFrom.TabIndex = 5;
+            this.txtBookingFrom.Size = new System.Drawing.Size(200, 20);
+            this.txtBookingFrom.TabIndex = 8;
             // 
             // txtRoomIDFK
             // 
@@ -239,6 +263,7 @@
             this.txtRoomIDFK.Name = "txtRoomIDFK";
             this.txtRoomIDFK.Size = new System.Drawing.Size(100, 20);
             this.txtRoomIDFK.TabIndex = 4;
+            this.txtRoomIDFK.Visible = false;
             // 
             // txtBookingID
             // 
@@ -246,6 +271,7 @@
             this.txtBookingID.Name = "txtBookingID";
             this.txtBookingID.Size = new System.Drawing.Size(100, 20);
             this.txtBookingID.TabIndex = 3;
+            this.txtBookingID.Visible = false;
             // 
             // dgvBookings
             // 
@@ -271,7 +297,7 @@
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(535, 326);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "tabPage3";
+            this.tabPage3.Text = "Guests";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // txtCheckIn
@@ -332,6 +358,37 @@
             this.DGVGuests.TabIndex = 0;
             this.DGVGuests.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVGuests_CellContentClick);
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.txtBarCharge);
+            this.tabPage4.Controls.Add(this.txtWiFiCharge);
+            this.tabPage4.Controls.Add(this.txtGuestIDFK);
+            this.tabPage4.Controls.Add(this.txtTelephoneCharge);
+            this.tabPage4.Controls.Add(this.txtRoomCharge);
+            this.tabPage4.Controls.Add(this.txtBillingID);
+            this.tabPage4.Controls.Add(this.dgvBillings);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(535, 326);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Billings";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // txtBarCharge
+            // 
+            this.txtBarCharge.Location = new System.Drawing.Point(285, 223);
+            this.txtBarCharge.Name = "txtBarCharge";
+            this.txtBarCharge.Size = new System.Drawing.Size(100, 20);
+            this.txtBarCharge.TabIndex = 6;
+            // 
+            // txtWiFiCharge
+            // 
+            this.txtWiFiCharge.Location = new System.Drawing.Point(34, 271);
+            this.txtWiFiCharge.Name = "txtWiFiCharge";
+            this.txtWiFiCharge.Size = new System.Drawing.Size(100, 20);
+            this.txtWiFiCharge.TabIndex = 5;
+            // 
             // txtGuestIDFK
             // 
             this.txtGuestIDFK.Location = new System.Drawing.Point(159, 223);
@@ -339,6 +396,36 @@
             this.txtGuestIDFK.Size = new System.Drawing.Size(100, 20);
             this.txtGuestIDFK.TabIndex = 13;
             this.txtGuestIDFK.Visible = false;
+            // 
+            // txtTelephoneCharge
+            // 
+            this.txtTelephoneCharge.Location = new System.Drawing.Point(159, 271);
+            this.txtTelephoneCharge.Name = "txtTelephoneCharge";
+            this.txtTelephoneCharge.Size = new System.Drawing.Size(100, 20);
+            this.txtTelephoneCharge.TabIndex = 4;
+            // 
+            // txtRoomCharge
+            // 
+            this.txtRoomCharge.Location = new System.Drawing.Point(285, 271);
+            this.txtRoomCharge.Name = "txtRoomCharge";
+            this.txtRoomCharge.Size = new System.Drawing.Size(100, 20);
+            this.txtRoomCharge.TabIndex = 3;
+            // 
+            // txtBillingID
+            // 
+            this.txtBillingID.Location = new System.Drawing.Point(34, 223);
+            this.txtBillingID.Name = "txtBillingID";
+            this.txtBillingID.Size = new System.Drawing.Size(100, 20);
+            this.txtBillingID.TabIndex = 1;
+            // 
+            // dgvBillings
+            // 
+            this.dgvBillings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBillings.Location = new System.Drawing.Point(6, 15);
+            this.dgvBillings.Name = "dgvBillings";
+            this.dgvBillings.Size = new System.Drawing.Size(506, 187);
+            this.dgvBillings.TabIndex = 0;
+            this.dgvBillings.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBillings_CellContentClick);
             // 
             // txtBillingsID
             // 
@@ -366,71 +453,12 @@
             // 
             // txtRoomCost
             // 
-            this.txtRoomCost.Location = new System.Drawing.Point(369, 238);
+            this.txtRoomCost.AutoSize = true;
+            this.txtRoomCost.Location = new System.Drawing.Point(431, 213);
             this.txtRoomCost.Name = "txtRoomCost";
-            this.txtRoomCost.Size = new System.Drawing.Size(100, 20);
-            this.txtRoomCost.TabIndex = 7;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.txtBarCharge);
-            this.tabPage4.Controls.Add(this.txtWiFiCharge);
-            this.tabPage4.Controls.Add(this.txtGuestIDFK);
-            this.tabPage4.Controls.Add(this.txtTelephoneCharge);
-            this.tabPage4.Controls.Add(this.txtRoomCharge);
-            this.tabPage4.Controls.Add(this.txtBillingID);
-            this.tabPage4.Controls.Add(this.dgvBillings);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(535, 326);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "tabPage4";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // dgvBillings
-            // 
-            this.dgvBillings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvBillings.Location = new System.Drawing.Point(6, 15);
-            this.dgvBillings.Name = "dgvBillings";
-            this.dgvBillings.Size = new System.Drawing.Size(506, 187);
-            this.dgvBillings.TabIndex = 0;
-            this.dgvBillings.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBillings_CellContentClick);
-            // 
-            // txtBillingID
-            // 
-            this.txtBillingID.Location = new System.Drawing.Point(34, 223);
-            this.txtBillingID.Name = "txtBillingID";
-            this.txtBillingID.Size = new System.Drawing.Size(100, 20);
-            this.txtBillingID.TabIndex = 1;
-            // 
-            // txtRoomCharge
-            // 
-            this.txtRoomCharge.Location = new System.Drawing.Point(285, 271);
-            this.txtRoomCharge.Name = "txtRoomCharge";
-            this.txtRoomCharge.Size = new System.Drawing.Size(100, 20);
-            this.txtRoomCharge.TabIndex = 3;
-            // 
-            // txtTelephoneCharge
-            // 
-            this.txtTelephoneCharge.Location = new System.Drawing.Point(159, 271);
-            this.txtTelephoneCharge.Name = "txtTelephoneCharge";
-            this.txtTelephoneCharge.Size = new System.Drawing.Size(100, 20);
-            this.txtTelephoneCharge.TabIndex = 4;
-            // 
-            // txtWiFiCharge
-            // 
-            this.txtWiFiCharge.Location = new System.Drawing.Point(34, 271);
-            this.txtWiFiCharge.Name = "txtWiFiCharge";
-            this.txtWiFiCharge.Size = new System.Drawing.Size(100, 20);
-            this.txtWiFiCharge.TabIndex = 5;
-            // 
-            // txtBarCharge
-            // 
-            this.txtBarCharge.Location = new System.Drawing.Point(285, 223);
-            this.txtBarCharge.Name = "txtBarCharge";
-            this.txtBarCharge.Size = new System.Drawing.Size(100, 20);
-            this.txtBarCharge.TabIndex = 6;
+            this.txtRoomCost.Size = new System.Drawing.Size(35, 13);
+            this.txtRoomCost.TabIndex = 17;
+            this.txtRoomCost.Text = "label1";
             // 
             // Form1
             // 
@@ -478,13 +506,11 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TextBox txtBookingFrom;
         private System.Windows.Forms.TextBox txtRoomIDFK;
         private System.Windows.Forms.TextBox txtBookingID;
         private System.Windows.Forms.DataGridView dgvBookings;
         private System.Windows.Forms.TextBox txtGuestIDFK;
         private System.Windows.Forms.Label txtBillingsID;
-        private System.Windows.Forms.TextBox txtBookingTo;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TextBox txtCheckIn;
         private System.Windows.Forms.TextBox txtCheckOut;
@@ -496,7 +522,6 @@
         private System.Windows.Forms.DataGridView DGVGuests;
         private System.Windows.Forms.TextBox txtGuestID;
         private System.Windows.Forms.TextBox txtBookingIDFK;
-        private System.Windows.Forms.TextBox txtRoomCost;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.DataGridView dgvBillings;
         private System.Windows.Forms.TextBox txtBarCharge;
@@ -504,6 +529,11 @@
         private System.Windows.Forms.TextBox txtTelephoneCharge;
         private System.Windows.Forms.TextBox txtRoomCharge;
         private System.Windows.Forms.TextBox txtBillingID;
+        private System.Windows.Forms.DateTimePicker txtBookingFrom;
+        private System.Windows.Forms.Button btnAddBooking;
+        private System.Windows.Forms.Button btnDeleteBooking;
+        private System.Windows.Forms.DateTimePicker txtBookingTo;
+        private System.Windows.Forms.Label txtRoomCost;
     }
 }
 

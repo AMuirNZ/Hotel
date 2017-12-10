@@ -29,9 +29,6 @@ namespace Hotel
 
         private void DGVData_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
-
-
             txtRoomID.Text = DGVData.Rows[e.RowIndex].Cells[0].Value.ToString();
             txtNumSingleBeds.Text = DGVData.Rows[e.RowIndex].Cells[1].Value.ToString();
             txtNumDoubleBeds.Text = DGVData.Rows[e.RowIndex].Cells[2].Value.ToString();
@@ -41,6 +38,12 @@ namespace Hotel
             txtTariffExtraPerson.Text = DGVData.Rows[e.RowIndex].Cells[6].Value.ToString();
             dgvBookings.DataSource = myBookings.viewBookings();
             myBookings.GuestID = Convert.ToInt16(txtRoomID.Text);
+            myBookings.numSingleBeds = Convert.ToInt16(txtNumSingleBeds.Text);
+            myBookings.numDoubleBeds = Convert.ToInt16(txtNumDoubleBeds.Text);
+           
+  
+
+
 
             //if (e.RowIndex >= 0)
             //{
@@ -86,13 +89,23 @@ namespace Hotel
 
         private void roomsTextFields()
         {
-            myRooms.RoomID = Convert.ToInt16(txtRoomID.Text);
+            //myRooms.RoomID = Convert.ToInt16(txtRoomID.Text);
             myRooms.NumSingleBeds = Convert.ToInt16(txtNumSingleBeds.Text);
             myRooms.NumDoubleBeds = Convert.ToInt16(txtNumDoubleBeds.Text);
             myRooms.ExtraFeatures = txtExtraFeatures.Text;
             myRooms.TariffSinglePerson = Convert.ToDecimal(txtTariffSinglePerson.Text);
             myRooms.Tariff2People = Convert.ToDecimal(txtTariff2People.Text);
             myRooms.TariffExtraPerson = Convert.ToDecimal(txtTariffExtraPerson.Text);
+        }
+
+        private void BookingsTextFields()
+        {
+            //myBookings.BookingID = Convert.ToInt16(txtBookingID.Text);
+            myBookings.RoomIDFK = Convert.ToInt16(txtRoomID.Text);
+            myBookings.BookingFrom = Convert.ToDateTime(txtBookingFrom.Text);
+            myBookings.BookingTo = Convert.ToDateTime(txtBookingTo.Text);
+            //myBookings.RoomCost = Convert.ToDecimal(txtRoomCost.Text);
+
         }
 
         private void DGVGuests_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -115,10 +128,11 @@ namespace Hotel
         private void dgvBookings_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             txtBookingID.Text = dgvBookings.Rows[e.RowIndex].Cells[0].Value.ToString();
-            txtRoomIDFK.Text = dgvBookings.Rows[e.RowIndex].Cells[1].Value.ToString();
+            //txtRoomIDFK.Text = dgvBookings.Rows[e.RowIndex].Cells[1].Value.ToString();
             txtBookingFrom.Text = dgvBookings.Rows[e.RowIndex].Cells[2].Value.ToString();
             txtBookingTo.Text = dgvBookings.Rows[e.RowIndex].Cells[3].Value.ToString();
             txtRoomCost.Text = dgvBookings.Rows[e.RowIndex].Cells[4].Value.ToString();
+
             myGuests.BookingID = Convert.ToInt16(txtBookingID.Text);
             DGVGuests.DataSource = myGuests.viewGuests();
             
@@ -130,14 +144,27 @@ namespace Hotel
             txtGuestIDFK.Text = dgvBillings.Rows[e.RowIndex].Cells[1].Value.ToString();
             txtBarCharge.Text = dgvBillings.Rows[e.RowIndex].Cells[2].Value.ToString();
             txtWiFiCharge.Text = dgvBillings.Rows[e.RowIndex].Cells[3].Value.ToString();
-            txtTelephoneCharge.Text = dgvBillings.Rows[e.RowIndex].Cells[0].Value.ToString();
-            txtRoomCharge.Text = dgvBillings.Rows[e.RowIndex].Cells[0].Value.ToString();
-            dgvBillings.DataSource = myBillings.viewBillings();
+            txtTelephoneCharge.Text = dgvBillings.Rows[e.RowIndex].Cells[4].Value.ToString();
+            //txtRoomCharge.Text = dgvBillings.Rows[e.RowIndex].Cells[5].Value.ToString();
+            //dgvBillings.DataSource = myBillings.viewBillings();
 
 
-            
+
         }
 
-       
+        private void btnAddBooking_Click(object sender, EventArgs e)
+        {
+
+            BookingsTextFields();
+            myBookings.addBooking();
+            dgvBookings.DataSource = myBookings.viewBookings();
+        }
+
+        private void btnDeleteBooking_Click(object sender, EventArgs e)
+        {
+            BookingsTextFields();
+            myBookings.deleteBooking();
+            DGVData.DataSource = myBookings.viewBookings();
+        }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Billings">
           <Key>
             <PropertyRef Name="BillingID" />
@@ -30,15 +30,15 @@
           <Key>
             <PropertyRef Name="GuestID" />
           </Key>
-          <Property Name="GuestID" Type="int" Nullable="false" />
+          <Property Name="GuestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BookingIDFK" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
           <Property Name="NumberOfGuests" Type="int" Nullable="false" />
           <Property Name="RoomBooked" Type="int" Nullable="false" />
-          <Property Name="CheckIn" Type="datetime" Nullable="false" />
-          <Property Name="CheckOut" Type="datetime" Nullable="false" />
-          <Property Name="BookingDate" Type="date" Nullable="false" />
+          <Property Name="CheckIn" Type="datetime" />
+          <Property Name="CheckOut" Type="datetime" />
+          <Property Name="BookingDate" Type="date" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -52,6 +52,16 @@
           <Property Name="Tariff2People" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="TariffExtraPerson" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <Association Name="FK_Billings_Guests">
           <End Role="Guests" Type="Self.Guests" Multiplicity="1" />
           <End Role="Billings" Type="Self.Billings" Multiplicity="*" />
@@ -64,7 +74,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Bookings_Room">
+        <Association Name="FK_Bookings_Room1">
           <End Role="Room" Type="Self.Room" Multiplicity="1" />
           <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
           <ReferentialConstraint>
@@ -93,11 +103,12 @@
           <EntitySet Name="Bookings" EntityType="Self.Bookings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Guests" EntityType="Self.Guests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Billings_Guests" Association="Self.FK_Billings_Guests">
             <End Role="Guests" EntitySet="Guests" />
             <End Role="Billings" EntitySet="Billings" />
           </AssociationSet>
-          <AssociationSet Name="FK_Bookings_Room" Association="Self.FK_Bookings_Room">
+          <AssociationSet Name="FK_Bookings_Room1" Association="Self.FK_Bookings_Room1">
             <End Role="Room" EntitySet="Room" />
             <End Role="Bookings" EntitySet="Bookings" />
           </AssociationSet>
@@ -106,8 +117,7 @@
             <End Role="Guests" EntitySet="Guests" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -145,9 +155,9 @@
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NumberOfGuests" Type="Int32" Nullable="false" />
           <Property Name="RoomBooked" Type="Int32" Nullable="false" />
-          <Property Name="CheckIn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CheckOut" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="BookingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CheckIn" Type="DateTime" Precision="3" />
+          <Property Name="CheckOut" Type="DateTime" Precision="3" />
+          <Property Name="BookingDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Billings" Relationship="Self.FK_Billings_Guests" FromRole="Guests" ToRole="Billings" />
           <NavigationProperty Name="Booking" Relationship="Self.FK_Guests_Bookings" FromRole="Guests" ToRole="Bookings" />
         </EntityType>
@@ -217,7 +227,18 @@
             <End Role="Bookings" EntitySet="Bookings" />
             <End Role="Guests" EntitySet="Guests" />
           </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="MotelModel.sysdiagram" />
         </EntityContainer>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -272,6 +293,17 @@
                 <ScalarProperty Name="TariffSinglePerson" ColumnName="TariffSinglePerson" />
                 <ScalarProperty Name="Tariff2People" ColumnName="Tariff2People" />
                 <ScalarProperty Name="TariffExtraPerson" ColumnName="TariffExtraPerson" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MotelModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

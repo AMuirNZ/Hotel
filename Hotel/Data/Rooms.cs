@@ -53,9 +53,9 @@ namespace Hotel.Data
                 room.NumSingleBeds = NumSingleBeds;
                 room.NumDoubleBeds = NumDoubleBeds;
                 room.ExtraFeatures = ExtraFeatures;
-                room.TariffSinglePerson = TariffSinglePerson;
-                room.Tariff2People = Tariff2People;
-                room.TariffExtraPerson = TariffExtraPerson;
+                room.TariffSinglePerson = 15;
+                room.Tariff2People = 25;
+                room.TariffExtraPerson = 5;
                 context.SaveChanges();
 
 

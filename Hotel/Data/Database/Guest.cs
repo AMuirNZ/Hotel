@@ -26,9 +26,9 @@ namespace Hotel.Data.Database
         public string Address { get; set; }
         public int NumberOfGuests { get; set; }
         public int RoomBooked { get; set; }
-        public System.DateTime CheckIn { get; set; }
-        public System.DateTime CheckOut { get; set; }
-        public System.DateTime BookingDate { get; set; }
+        public Nullable<System.DateTime> CheckIn { get; set; }
+        public Nullable<System.DateTime> CheckOut { get; set; }
+        public Nullable<System.DateTime> BookingDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Billing> Billings { get; set; }
