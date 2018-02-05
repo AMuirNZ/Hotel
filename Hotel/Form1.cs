@@ -24,27 +24,24 @@ namespace Hotel
         {
             InitializeComponent();
             DGVData.DataSource = myRooms.viewRooms();
-            
-        }
 
+        }
+        
+        //Send information from DGV to form
         private void DGVData_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            txtRoomID.Text = DGVData.Rows[e.RowIndex].Cells[0].Value.ToString();
-            txtNumSingleBeds.Text = DGVData.Rows[e.RowIndex].Cells[1].Value.ToString();
-            txtNumDoubleBeds.Text = DGVData.Rows[e.RowIndex].Cells[2].Value.ToString();
-            txtExtraFeatures.Text = DGVData.Rows[e.RowIndex].Cells[3].Value.ToString();
-            txtTariffSinglePerson.Text = DGVData.Rows[e.RowIndex].Cells[4].Value.ToString();
-            txtTariff2People.Text = DGVData.Rows[e.RowIndex].Cells[5].Value.ToString();
-            txtTariffExtraPerson.Text = DGVData.Rows[e.RowIndex].Cells[6].Value.ToString();
+            txtRoomID.Text = DGVData.Rows[e.RowIndex].Cells[6].Value.ToString();
+            txtNumSingleBeds.Text = DGVData.Rows[e.RowIndex].Cells[0].Value.ToString();
+            txtNumDoubleBeds.Text = DGVData.Rows[e.RowIndex].Cells[1].Value.ToString();
+            txtExtraFeatures.Text = DGVData.Rows[e.RowIndex].Cells[2].Value.ToString();
+            txtTariffSinglePerson.Text = DGVData.Rows[e.RowIndex].Cells[3].Value.ToString();
+            txtTariff2People.Text = DGVData.Rows[e.RowIndex].Cells[4].Value.ToString();
+            txtTariffExtraPerson.Text = DGVData.Rows[e.RowIndex].Cells[5].Value.ToString();
             dgvBookings.DataSource = myBookings.viewBookings();
             myBookings.GuestID = Convert.ToInt16(txtRoomID.Text);
             myBookings.numSingleBeds = Convert.ToInt16(txtNumSingleBeds.Text);
             myBookings.numDoubleBeds = Convert.ToInt16(txtNumDoubleBeds.Text);
-           
-  
-
-
-
+                
             //if (e.RowIndex >= 0)
             //{
 
@@ -52,10 +49,32 @@ namespace Hotel
             //    txtCustID.Text = CustID.ToString();
 
             //}
+
+            txtBookingID2.Text = DGVData.Rows[e.RowIndex].Cells[6].Value.ToString();
         }
 
+        //Add Room
         private void btnAddRoom_Click(object sender, EventArgs e)
         {
+            //Work out if any fields are empty
+            if (txtNumSingleBeds.Text != string.Empty && txtNumDoubleBeds.Text != string.Empty &&
+                txtTariffSinglePerson.Text != string.Empty && txtTariff2People.Text != string.Empty && txtTariffExtraPerson.Text != string.Empty)
+            {
+                //Proceed to add room if all entered
+                AddRoom();
+
+            }
+            else
+            {
+                //Display error message no rooms.
+                MessageBox.Show("Please enter all fields");
+            } 
+            
+        }
+
+        private void AddRoom()
+        {
+            //myRooms.RoomID = Convert.ToInt16(txtRoomID.Text);
             roomsTextFields();
 
             myRooms.addRooms();
@@ -64,32 +83,39 @@ namespace Hotel
 
         private void btnDeleteRoom_Click(object sender, EventArgs e)
         {
+            if (txtRoomID.Text != string.Empty)
+            {
 
-            roomsTextFields();
-            myRooms.deleteRoom();
-            DGVData.DataSource = myRooms.viewRooms();
+
+                roomsTextFields();
+                myRooms.RoomID = Convert.ToInt16(txtRoomID.Text);
+                myRooms.deleteRoom();
+                DGVData.DataSource = myRooms.viewRooms();
+            }
+            else
+            {
+                MessageBox.Show("Please select a record to delete");
+            }
 
         }
 
-        private void txtTariffSinglePerson_TextChanged(object sender, EventArgs e)
-        {
 
-        }
-
+        //Update room
         private void btnUpdate_Click(object sender, EventArgs e)
         {
 
             roomsTextFields();
+            myRooms.RoomID = Convert.ToInt16(txtRoomID.Text);
 
             myRooms.updateRooms();
             DGVData.DataSource = myRooms.viewRooms();
         }
 
 
-
+        //Send all rooms values from form to 
         private void roomsTextFields()
         {
-            //myRooms.RoomID = Convert.ToInt16(txtRoomID.Text);
+            
             myRooms.NumSingleBeds = Convert.ToInt16(txtNumSingleBeds.Text);
             myRooms.NumDoubleBeds = Convert.ToInt16(txtNumDoubleBeds.Text);
             myRooms.ExtraFeatures = txtExtraFeatures.Text;
@@ -100,7 +126,7 @@ namespace Hotel
 
         private void BookingsTextFields()
         {
-            //myBookings.BookingID = Convert.ToInt16(txtBookingID.Text);
+            
             myBookings.RoomIDFK = Convert.ToInt16(txtRoomID.Text);
             myBookings.BookingFrom = Convert.ToDateTime(txtBookingFrom.Text);
             myBookings.BookingTo = Convert.ToDateTime(txtBookingTo.Text);
@@ -121,21 +147,35 @@ namespace Hotel
             txtBookingDate.Text = DGVGuests.Rows[e.RowIndex].Cells[8].Value.ToString();
             myBillings.GuestID = Convert.ToInt16(txtGuestID.Text);
             dgvBillings.DataSource = myBillings.viewBillings();
-
-            //DGVGuests.DataSource = myBookings.viewBookings();
         }
 
         private void dgvBookings_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            txtBookingID.Text = dgvBookings.Rows[e.RowIndex].Cells[0].Value.ToString();
-            //txtRoomIDFK.Text = dgvBookings.Rows[e.RowIndex].Cells[1].Value.ToString();
+            
+
+            txtBookingID2.Text = dgvBookings.Rows[e.RowIndex].Cells[0].Value.ToString();
+
+
+            txtRoomIDFK.Text = dgvBookings.Rows[e.RowIndex].Cells[1].Value.ToString();
             txtBookingFrom.Text = dgvBookings.Rows[e.RowIndex].Cells[2].Value.ToString();
             txtBookingTo.Text = dgvBookings.Rows[e.RowIndex].Cells[3].Value.ToString();
+
             txtRoomCost.Text = dgvBookings.Rows[e.RowIndex].Cells[4].Value.ToString();
 
-            myGuests.BookingID = Convert.ToInt16(txtBookingID.Text);
+
+            Date();
+            myGuests.BookingID = Convert.ToInt16(txtBookingID2.Text);
             DGVGuests.DataSource = myGuests.viewGuests();
-            
+
+        }
+
+        private void Date()
+        {
+            DateTime BookingFrom = Convert.ToDateTime(txtBookingFrom.Text);
+            DateTime BookingTo = Convert.ToDateTime(txtBookingTo.Text);
+
+            lblDays.Text = (BookingTo - BookingFrom).TotalDays.ToString();
+
         }
 
         private void dgvBillings_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -145,16 +185,14 @@ namespace Hotel
             txtBarCharge.Text = dgvBillings.Rows[e.RowIndex].Cells[2].Value.ToString();
             txtWiFiCharge.Text = dgvBillings.Rows[e.RowIndex].Cells[3].Value.ToString();
             txtTelephoneCharge.Text = dgvBillings.Rows[e.RowIndex].Cells[4].Value.ToString();
-            //txtRoomCharge.Text = dgvBillings.Rows[e.RowIndex].Cells[5].Value.ToString();
-            //dgvBillings.DataSource = myBillings.viewBillings();
 
-
+            lblTotalCost.Text = dgvBillings.Rows[e.RowIndex].Cells[5].Value.ToString();
 
         }
 
         private void btnAddBooking_Click(object sender, EventArgs e)
         {
-
+            
             BookingsTextFields();
             myBookings.addBooking();
             dgvBookings.DataSource = myBookings.viewBookings();
@@ -162,9 +200,134 @@ namespace Hotel
 
         private void btnDeleteBooking_Click(object sender, EventArgs e)
         {
+            myBookings.BookingID = Convert.ToInt16(txtBookingID2.Text);
             BookingsTextFields();
             myBookings.deleteBooking();
-            DGVData.DataSource = myBookings.viewBookings();
+            dgvBookings.DataSource = myBookings.viewBookings();
+        }
+
+        private void btnAddGuest_Click(object sender, EventArgs e)
+        {
+            if (txtName.Text != string.Empty && txtAddress.Text != string.Empty &&
+                txtNumberOfGuests.Text != string.Empty && txtRoomBooked.Text != string.Empty) 
+            {
+                addGuest();
+            }
+            else
+            {
+                MessageBox.Show("Please enter all fields");
+            }
+                
+            
+            
+        }
+
+        private void addGuest()
+        {
+            //myGuests.GuestID = Convert.ToInt16(txtGuestID.Text);
+            GuestsTextFields();
+            myGuests.addGuest();
+            DGVGuests.DataSource = myGuests.viewGuests();
+        }
+
+        private void GuestsTextFields()
+        {
+            int BookingID = Convert.ToInt16(txtBookingID2.Text);
+
+            myGuests.BookingIDFK = BookingID;
+            myGuests.Name = txtName.Text;
+            myGuests.Address = txtAddress.Text;
+            myGuests.NumberOfGuests = Convert.ToInt16(txtNumberOfGuests.Text);
+            myGuests.RoomBooked = Convert.ToInt16(txtRoomID.Text);
+            myGuests.CheckIn = Convert.ToDateTime(txtCheckIn.Text);
+            myGuests.CheckOut = Convert.ToDateTime(txtCheckOut.Text);
+            myGuests.BookingDate = DateTime.Now;
+
+
+
+        }
+
+        private void BillingsTextFields()
+        {
+            decimal Tarriff, BarCharge, TelephoneCharge, WiFiCharge, RoomCost, TarriffSinglePerson, Tarriff2People, TariffExtraPerson, RoomCost2, Days;
+
+            int NumberOfGuests, GuestIDFK; //BillingID, 
+
+            TarriffSinglePerson = Convert.ToDecimal(txtTariffSinglePerson.Text);
+            Tarriff2People = Convert.ToDecimal(txtTariff2People.Text);
+            TariffExtraPerson = Convert.ToDecimal(txtTariffExtraPerson.Text);
+            RoomCost2 = Convert.ToDecimal(txtRoomCost.Text);
+            Days = Convert.ToDecimal(lblDays.Text);
+
+            
+                
+            NumberOfGuests = Convert.ToInt16(txtNumberOfGuests.Text);
+
+            if (NumberOfGuests  == 1)
+            {
+                Tarriff = TarriffSinglePerson;
+            }
+            else if (NumberOfGuests == 2)
+            {
+                Tarriff = Tarriff2People;
+            }
+            else
+            {
+                Tarriff = Tarriff2People + (TariffExtraPerson * (NumberOfGuests - 2));
+            }
+
+
+             
+
+            //BillingID = Convert.ToInt16(txtBillingID.Text);
+            GuestIDFK = Convert.ToInt16(txtGuestID.Text);
+            BarCharge = Convert.ToDecimal(txtBarCharge.Text);
+            WiFiCharge = Convert.ToDecimal(txtWiFiCharge.Text);
+            TelephoneCharge = Convert.ToDecimal(txtTelephoneCharge.Text);
+            RoomCost = (RoomCost2 * Days) + BarCharge + WiFiCharge + Tarriff + TelephoneCharge;
+
+            //myBillings.BillingID = BillingID;
+            myBillings.GuestID = GuestIDFK;
+            myBillings.BarCharge = BarCharge;
+            myBillings.WiFiCharge = WiFiCharge;
+            myBillings.TelephoneCharge = TelephoneCharge;
+            myBillings.RoomCost = RoomCost;
+
+            lblTotalCost.Text = RoomCost.ToString();
+
+        }
+
+        private void btnAddBilling_Click(object sender, EventArgs e)
+        {
+            BillingsTextFields();
+            myBillings.addBilling();
+            dgvBillings.DataSource = myBillings.viewBillings();
+        }
+
+        private void btnDeleteGuest_Click(object sender, EventArgs e)
+        {
+            GuestsTextFields();
+            myGuests.deleteGuest();
+            DGVGuests.DataSource = myGuests.viewGuests();
+        }
+
+        private void btnUpdateBookings_Click(object sender, EventArgs e)
+        {
+            BookingsTextFields();
+            myBookings.BookingID = Convert.ToInt16(txtBookingID2.Text);
+
+            myBookings.updateBooking();
+            dgvBookings.DataSource = myBookings.viewBookings();
+        }
+
+        private void btnUpdateGuest_Click(object sender, EventArgs e)
+        {
+            GuestsTextFields();
+            myGuests.GuestID = Convert.ToInt16(txtGuestID.Text);
+
+            myGuests.updateGuest();
+            DGVGuests.DataSource = myGuests.viewGuests();
         }
     }
 }
+

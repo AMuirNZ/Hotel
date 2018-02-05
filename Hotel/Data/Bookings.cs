@@ -26,12 +26,12 @@ namespace Hotel.Data
 
         public IEnumerable viewBookings()
         {
-            //Our standard Using statement passing all the data to context 
+            //Our standard Using statement passing all the data to context  
             using (var context = new MotelEntities())
             {
                 //What ever we want our code to do we do it in here
                 //Pass our fields across to a variable
-                var alldata = from g in context.Bookings where g.RoomIDFK == GuestID
+                var alldata = from g in context.Bookings  where g.RoomIDFK == GuestID
                     select new
                     {
                         g.BookingID,
@@ -75,11 +75,29 @@ namespace Hotel.Data
 
                 //select the row you want to delete
                 var contact = (from s in context.Bookings
-                    where s.BookingID == BookingID
-                    select s).SingleOrDefault();
+                               where s.BookingID == BookingID
+                                select s).SingleOrDefault();
                 //run remove command
                 context.Bookings.Remove(contact);
                 //save the changes
+                context.SaveChanges();
+
+
+            }
+        }
+
+        public void updateBooking()
+        {
+            using (var context = new MotelEntities())
+            {
+                var query = from s in context.Bookings
+                            where s.BookingID == BookingID
+                            select s;
+                var room = query.FirstOrDefault();
+
+                room.BookingFrom = BookingFrom;
+                room.BookingTo = BookingTo;
+                
                 context.SaveChanges();
 
 

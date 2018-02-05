@@ -14,6 +14,16 @@ namespace Hotel.Data
     {
 
         public int GuestID { get; set; }
+        public int BillingID { get; set; }
+        //public int GuestIDFK { get; set; }
+       
+        public decimal  BarCharge { get; set; }
+
+        public decimal WiFiCharge { get; set; }
+
+        public decimal TelephoneCharge { get; set; }
+
+        public decimal RoomCost { get; set; }
 
 
         public IEnumerable viewBillings()
@@ -32,7 +42,7 @@ namespace Hotel.Data
                               select new
                     {
                         g.BillingID,
-                        //g.GuestIDFK,
+                        g.GuestIDFK,
                         g.BarCharge,
                         g.WiFiCharge,
                         g.TelephoneCharge,
@@ -42,6 +52,29 @@ namespace Hotel.Data
                 return alldata.ToList();
             }
 
+        }
+
+        public void addBilling()
+        {
+            using (var context = new MotelEntities())
+            {
+
+
+                var BillingZ = new Billing();
+
+                BillingZ.GuestIDFK = GuestID;
+                BillingZ.BarCharge = BarCharge;
+                BillingZ.WiFiCharge = WiFiCharge;
+                BillingZ.TelephoneCharge = TelephoneCharge;
+                BillingZ.RoomCharge = RoomCost;
+
+
+
+                //Add to entity set of context
+                context.Billings.Add(BillingZ);
+                context.SaveChanges();
+
+            }
         }
 
     }
