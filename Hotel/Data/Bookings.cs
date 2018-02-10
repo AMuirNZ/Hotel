@@ -8,6 +8,8 @@ using Hotel.Data.Database;
 
 namespace Hotel.Data
 {
+
+    //Bookings variables introduced from forms.
     class BookingsClass
     {
 
@@ -47,6 +49,7 @@ namespace Hotel.Data
             }
         }
 
+        //add booking to the database
         public void addBooking()
         {
             using (var context = new MotelEntities())
@@ -54,7 +57,7 @@ namespace Hotel.Data
 
 
                 var BookingZ = new Booking();
-              
+                //assign fields from database to variables
                 BookingZ.RoomIDFK = GuestID;
                 BookingZ.BookingFrom = BookingFrom;
                 BookingZ.BookingTo = BookingTo;
@@ -68,6 +71,7 @@ namespace Hotel.Data
             }
         }
 
+        //delete booking from the database
         public void deleteBooking()
         {
             using (var context = new MotelEntities())
@@ -86,6 +90,7 @@ namespace Hotel.Data
             }
         }
 
+        //update the booking in the database
         public void updateBooking()
         {
             using (var context = new MotelEntities())

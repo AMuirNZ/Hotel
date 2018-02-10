@@ -8,14 +8,15 @@ using Hotel.Data.Database;
 
 namespace Hotel.Data
 {
+
     class BillingsClass
 
-
+        //Billings variables introduced from form.
     {
 
         public int GuestID { get; set; }
         public int BillingID { get; set; }
-        //public int GuestIDFK { get; set; }
+       
        
         public decimal  BarCharge { get; set; }
 
@@ -33,11 +34,10 @@ namespace Hotel.Data
             
      
 
-            //Our standard Using statement passing all the data to context 
+            //Extract all fields from databases and assign to correct names
             using (var context = new MotelEntities())
             {
-                //What ever we want our code to do we do it in here
-                //Pass our fields across to a variable
+                
                 var alldata = from g in context.Billings where g.GuestIDFK == GuestID
                               select new
                     {
@@ -53,13 +53,13 @@ namespace Hotel.Data
             }
 
         }
-
+        //Add billing to database
         public void addBilling()
         {
             using (var context = new MotelEntities())
             {
 
-
+                //assign variables to fields from database
                 var BillingZ = new Billing();
 
                 BillingZ.GuestIDFK = GuestID;

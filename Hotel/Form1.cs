@@ -112,7 +112,7 @@ namespace Hotel
         }
 
 
-        //Send all rooms values from form to 
+        //Send all rooms values from form to other thing
         private void roomsTextFields()
         {
             
@@ -124,6 +124,8 @@ namespace Hotel
             myRooms.TariffExtraPerson = Convert.ToDecimal(txtTariffExtraPerson.Text);
         }
 
+
+       //same as above thing
         private void BookingsTextFields()
         {
             
@@ -134,6 +136,8 @@ namespace Hotel
 
         }
 
+
+        //Add content from Guests DGV to form
         private void DGVGuests_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             txtGuestID.Text = DGVGuests.Rows[e.RowIndex].Cells[0].Value.ToString();
@@ -149,6 +153,7 @@ namespace Hotel
             dgvBillings.DataSource = myBillings.viewBillings();
         }
 
+        //Add content from Bookings DGV to form
         private void dgvBookings_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             
@@ -168,15 +173,18 @@ namespace Hotel
             DGVGuests.DataSource = myGuests.viewGuests();
 
         }
-
+        //Date calculator
         private void Date()
         {
             DateTime BookingFrom = Convert.ToDateTime(txtBookingFrom.Text);
             DateTime BookingTo = Convert.ToDateTime(txtBookingTo.Text);
 
+            //Calculate how many days between booking from and booking to.
             lblDays.Text = (BookingTo - BookingFrom).TotalDays.ToString();
 
         }
+
+
 
         private void dgvBillings_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -190,10 +198,12 @@ namespace Hotel
 
         }
 
+        //Add booking button
         private void btnAddBooking_Click(object sender, EventArgs e)
         {
             
-            BookingsTextFields();
+            
+            BookingsTextFields(); //Important for sending to 
             myBookings.addBooking();
             dgvBookings.DataSource = myBookings.viewBookings();
         }
@@ -229,6 +239,7 @@ namespace Hotel
             myGuests.addGuest();
             DGVGuests.DataSource = myGuests.viewGuests();
         }
+
 
         private void GuestsTextFields()
         {
@@ -286,7 +297,7 @@ namespace Hotel
             TelephoneCharge = Convert.ToDecimal(txtTelephoneCharge.Text);
             RoomCost = (RoomCost2 * Days) + BarCharge + WiFiCharge + Tarriff + TelephoneCharge;
 
-            //myBillings.BillingID = BillingID;
+           
             myBillings.GuestID = GuestIDFK;
             myBillings.BarCharge = BarCharge;
             myBillings.WiFiCharge = WiFiCharge;
@@ -297,13 +308,15 @@ namespace Hotel
 
         }
 
+        //Button for adding billing
         private void btnAddBilling_Click(object sender, EventArgs e)
         {
             BillingsTextFields();
             myBillings.addBilling();
             dgvBillings.DataSource = myBillings.viewBillings();
         }
-
+        
+        //Button for deleting guests
         private void btnDeleteGuest_Click(object sender, EventArgs e)
         {
             GuestsTextFields();
@@ -311,6 +324,7 @@ namespace Hotel
             DGVGuests.DataSource = myGuests.viewGuests();
         }
 
+        //Button for updating bookings
         private void btnUpdateBookings_Click(object sender, EventArgs e)
         {
             BookingsTextFields();
@@ -320,6 +334,7 @@ namespace Hotel
             dgvBookings.DataSource = myBookings.viewBookings();
         }
 
+        //Button for updating guests 
         private void btnUpdateGuest_Click(object sender, EventArgs e)
         {
             GuestsTextFields();

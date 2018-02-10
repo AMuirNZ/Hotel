@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace Hotel.Data
 {
+
+    //Room variables introduced from form.
     class Rooms
     {
         public int RoomID { get; set; }
@@ -40,7 +42,7 @@ namespace Hotel.Data
             }
 
         }
-
+        //Update rooms in database from from        
         public void updateRooms()
         {
             using (var context = new MotelEntities())
@@ -62,6 +64,7 @@ namespace Hotel.Data
             }
         }
 
+        //add room from form in database
         public void addRooms()
         {
             using (var context = new MotelEntities())
@@ -84,6 +87,7 @@ namespace Hotel.Data
             }
         }
 
+        //delete selected room from database
         public void deleteRoom()
         {
             using (var context = new MotelEntities())

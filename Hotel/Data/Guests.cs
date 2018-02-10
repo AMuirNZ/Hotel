@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System;   
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +8,8 @@ using Hotel.Data.Database;
 
 namespace Hotel.Data
 {
+
+    //Guests variables introduced from form.
     class GuestsClass
     {
 
@@ -20,7 +22,6 @@ namespace Hotel.Data
         public DateTime CheckIn { get; set; }
         public DateTime CheckOut { get; set; }
         public DateTime BookingDate { get; set; }
-
         public int BookingID { get; set; }
 
         public IEnumerable viewGuests()
@@ -28,8 +29,7 @@ namespace Hotel.Data
             //Our standard Using statement passing all the data to context 
             using (var context = new MotelEntities())
             {
-                //What ever we want our code to do we do it in here
-                //Pass our fields across to a variable
+                //Extract all fields from databases and assign to correct names
                 var alldata = from g in context.Guests where g.BookingIDFK == BookingID 
                     select new
                     {
@@ -49,11 +49,12 @@ namespace Hotel.Data
             }
         }
 
+        //Add Guest to database     
         public void addGuest()
         {
             using (var context = new MotelEntities())
             {
-
+                //assign variables to fields from database
 
                 var GuestZ = new Guest();
 
@@ -74,6 +75,7 @@ namespace Hotel.Data
             }
         }
 
+        //Delete Guest from Database
         public void deleteGuest()
         {
             using (var context = new MotelEntities())
@@ -92,8 +94,11 @@ namespace Hotel.Data
             }
         }
 
+        //Update currently existing guest in database         
         public void updateGuest()
         {
+
+            //assign variables to fields from database
             using (var context = new MotelEntities())
             {
                 var query = from s in context.Guests
