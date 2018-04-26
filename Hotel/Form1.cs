@@ -15,6 +15,7 @@ namespace Hotel
 {
     public partial class Form1 : Form
     {
+        //Establish classes
         Rooms myRooms = new Rooms();
         BillingsClass myBillings = new BillingsClass();
         BookingsClass myBookings = new BookingsClass();
@@ -23,6 +24,7 @@ namespace Hotel
         public Form1()
         {
             InitializeComponent();
+            //Load rooms DGV upon startup
             DGVData.DataSource = myRooms.viewRooms();
 
         }
@@ -42,13 +44,7 @@ namespace Hotel
             myBookings.numSingleBeds = Convert.ToInt16(txtNumSingleBeds.Text);
             myBookings.numDoubleBeds = Convert.ToInt16(txtNumDoubleBeds.Text);
                 
-            //if (e.RowIndex >= 0)
-            //{
-
-
-            //    txtCustID.Text = CustID.ToString();
-
-            //}
+            
 
             txtBookingID2.Text = DGVData.Rows[e.RowIndex].Cells[6].Value.ToString();
         }
@@ -185,7 +181,7 @@ namespace Hotel
         }
 
 
-
+        //add content from billings dgv to form
         private void dgvBillings_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             txtBillingID.Text = dgvBillings.Rows[e.RowIndex].Cells[0].Value.ToString();

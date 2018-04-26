@@ -12,7 +12,6 @@ namespace Hotel.Data
     //Guests variables introduced from form.
     class GuestsClass
     {
-
         public int GuestID { get; set; }
         public int BookingIDFK { get; set; }
         public string Name { get; set; }
