@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Hotel.Data.Database;
 
 namespace Hotel.Data
@@ -22,6 +23,8 @@ namespace Hotel.Data
         public DateTime CheckOut { get; set; }
         public DateTime BookingDate { get; set; }
         public int BookingID { get; set; }
+
+      
 
         public IEnumerable viewGuests()
         {
@@ -118,6 +121,10 @@ namespace Hotel.Data
 
 
             }
+
+            
         }
+
+       
     }
 }

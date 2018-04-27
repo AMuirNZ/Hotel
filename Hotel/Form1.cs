@@ -20,6 +20,7 @@ namespace Hotel
         BillingsClass myBillings = new BillingsClass();
         BookingsClass myBookings = new BookingsClass();
         private GuestsClass myGuests = new GuestsClass();
+        private Empty myEmpty = new Empty();
 
         public Form1()
         {
@@ -112,12 +113,14 @@ namespace Hotel
         private void roomsTextFields()
         {
             
+
             myRooms.NumSingleBeds = Convert.ToInt16(txtNumSingleBeds.Text);
             myRooms.NumDoubleBeds = Convert.ToInt16(txtNumDoubleBeds.Text);
             myRooms.ExtraFeatures = txtExtraFeatures.Text;
             myRooms.TariffSinglePerson = Convert.ToDecimal(txtTariffSinglePerson.Text);
             myRooms.Tariff2People = Convert.ToDecimal(txtTariff2People.Text);
             myRooms.TariffExtraPerson = Convert.ToDecimal(txtTariffExtraPerson.Text);
+            
         }
 
 
@@ -214,8 +217,13 @@ namespace Hotel
 
         private void btnAddGuest_Click(object sender, EventArgs e)
         {
-            if (txtName.Text != string.Empty && txtAddress.Text != string.Empty &&
-                txtNumberOfGuests.Text != string.Empty && txtRoomBooked.Text != string.Empty) 
+
+            bool Empty;
+           
+
+            Empty = myEmpty.Guests(txtName.Text, txtAddress.Text, txtNumberOfGuests.Text, txtRoomBooked.Text);
+
+            if (Empty == true)
             {
                 addGuest();
             }
@@ -223,9 +231,6 @@ namespace Hotel
             {
                 MessageBox.Show("Please enter all fields");
             }
-                
-            
-            
         }
 
         private void addGuest()

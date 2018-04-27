@@ -91,6 +91,7 @@
     <Compile Include="Data\Database\Room.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Empty.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
